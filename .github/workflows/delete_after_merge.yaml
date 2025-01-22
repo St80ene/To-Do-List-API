@@ -1,0 +1,22 @@
+name: Merge and Delete branch
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  state_event_type:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete branch after being merged to main
+        if: github.event.pull_request.merged_at != null
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Extract the branch name from the event payload
+          branch_name="${{ github.event.pull_request.head.ref }}"
+          echo "Deleting branch: $branch_name"
+
+          # Directly delete the branch without authentication step
+          gh api -X DELETE repos/${{ github.repository }}/git/refs/heads/$branch_name

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask
 
 from database.db import db_init
 from src.controllers.task.index import findAll, store

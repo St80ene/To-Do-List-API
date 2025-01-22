@@ -1,0 +1,21 @@
+name: Assign PR to author
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  state_event_type:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign PR to author
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_author=${{ github.event.pull_request.user.login }}
+          pr_number=${{ github.event.pull_request.number }}
+
+          # Use an array syntax for assignees
+          gh api repos/${{ github.repository }}/issues/$pr_number \
+            -X PATCH \
+            -f assignees[]="$pr_author"
