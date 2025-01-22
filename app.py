@@ -1,9 +1,12 @@
 from flask import Flask
 
-from database.db import db_init
-from src.controllers.task.index import findAll, store
+from resources.controllers.task.index import Task
+from resources.database.db import DatabaseConnection
 
 app = Flask(__name__)
+
+task = Task()
+db = DatabaseConnection()
 
 
 @app.route("/")
@@ -13,15 +16,25 @@ def home():
 
 @app.route("/all")
 def viewAll():
-    return findAll()
+    return task.findAll
 
 
 @app.route("/store", methods=["POST"])
 def create():
-    store()
+    task.store()
+
+
+@app.route("/delete<int: task_id>", methods=["DELETE"])
+def create():
+    task.store()
+
+
+@app.route("/update<int: task_id>", methods=["PATCH"])
+def create():
+    task.store()
 
 
 if __name__ == "__main__":
-    db_init()
+    db.db_init()
 
     app.run(debug=True)
