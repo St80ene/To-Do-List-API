@@ -45,23 +45,58 @@ Ideal for developers looking for a simple task management system to integrate in
    pip install -r requirements.txt
    ```
 
-### 8. **Usage**
+## Usage
 
 To start the server, run:
 
 ```bash
 python app.py
 ```
-### 8. **API Endpoints**
 
-GET `/all` - Retrieve all tasks
+## API Endpoints
 
-POST `/store` - Add a new task
-  - Body Parameters:
-      - title: (string) Task title
-      - description: (string) Task description
-   
+  - `/` **(GET)**
 
-### 9. **Contributing**
+      - Description: Displays a welcome message.
+
+   - `/api/v1/all` **(GET)**
+
+      - Description: Retrieves a list of all tasks.
+
+   - `/api/v1/store` **(POST)**
+
+      - Description: Creates a new task.
+      - Request Body:
+         - title (string, required): Title of the task.
+         - description (string, optional): Description of the task.
+       
+   - `/api/v1/update/:id` **(PATCH)**
+
+      - Description: Updates an existing task.
+      - Path Parameters:
+         - `:id` (integer): Unique identifier of the task.
+      - Request Body:
+         - title (string, optional): New title of the task.
+         - description (string, optional): New description of the task.
+         - completed (boolean, optional): Indicates whether the task is completed (true) or not (false).
+       
+   - `/api/v1/delete/:id` **(DELETE)**
+
+      - Description: Deletes a specific task.
+      - Path Parameters:
+         - `:id` (integer): Unique identifier of the task.
+       
+        
+## Technologies Used
+
+   - Framework: Flask
+   - Database: SQLite
+   - DevOps: Docker
+   - Other Tools: Git, Postman
+
+## Contributing
 
 Contributions are welcome! Submit a pull request after forking and branching.
+
+## License
+This project is licensed under the MIT License.
