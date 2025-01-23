@@ -17,6 +17,7 @@ class Task:
         return {"status": 200, "message": "Tasks fetch successful", "tasks": tasks}
 
     def deleteOne(self, task_id):
+        print({task_id})
         try:
             self.db.db_cursor.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
             self.db.db_connection.commit()
@@ -29,6 +30,8 @@ class Task:
             )
 
     def updateOne(self, task_id):
+
+        print({task_id})
 
         try:
             content_type = request.headers.get("Content-Type", "").lower()
